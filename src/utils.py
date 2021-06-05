@@ -1,4 +1,5 @@
 import logging
+import os
 
 import requests
 
@@ -22,7 +23,7 @@ def get_location(ip_address):
             "Content-Type": "application/json"
         },
         params={
-            "apiKey": "",
+            "apiKey": os.getenv("LOCATION_API_KEY"),
             "ip": ip_address
         }
     ).json()
@@ -49,7 +50,7 @@ def get_weather_info(latitude, longitude):
             "Content-Type": "application/json"
         },
         params={
-            "appid": "",
+            "appid": os.getenv("WEATHER_API_KEY"),
             "lat": latitude,
             "lon": longitude,
             "units": "metric",
@@ -62,7 +63,7 @@ def get_weather_info(latitude, longitude):
     return weather_info
 
 
-def build_output(location, weather_info, ip):
+def build_output_dict(location, weather_info, ip):
     """
 
     :param location: Object with details on location of IP address
@@ -87,3 +88,18 @@ def build_output(location, weather_info, ip):
     )
     logger.info(f"Output: {output}")
     return output
+
+
+def get_ips_from_file(ip_address_path):
+    """
+
+    :param ip_address_path: Path to text file with ip addresses
+    :return: list with the ip addresses from the file
+    """
+    logger.info(
+        f"Getting ip addresses from txt file: {ip_address_path}"
+    )
+    with open(ip_address_path) as f:
+        lines = f.read().splitlines()
+    logger.debug(lines)
+    return lines
