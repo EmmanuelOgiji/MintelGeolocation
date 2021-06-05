@@ -21,7 +21,6 @@ jobs:
           pkg-manager: pip
       - setup_remote_docker:
           version: 19.03.13
-          docker_layer_caching: true
 
       # build and push Docker image
       - run: |
