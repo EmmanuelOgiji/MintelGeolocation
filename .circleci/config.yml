@@ -6,7 +6,10 @@ orbs:
 workflows:
   build-and-test:
       jobs:
-        - Build and Push
+        - Build and Push:
+            filters:
+              branches:
+                only: master
 
 jobs:
   Build and Push:

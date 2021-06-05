@@ -1,7 +1,10 @@
 import logging
 import os
 
+import pandas
 import requests
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 from data_objects import Location, Constants, WeatherInfo
 
@@ -103,3 +106,70 @@ def get_ips_from_file(ip_address_path):
         lines = f.read().splitlines()
     logger.debug(lines)
     return lines
+
+
+def build_weather_data_from_locations(ip_address_path):
+    """
+    Gets location and corresponding weather info from IP addresses
+    and writes them into csv file
+    :param ip_address_path: path to text file with list of ip addresses
+    """
+    ips = get_ips_from_file(ip_address_path)
+    for ip in ips:
+        index = ips.index(ip)
+        location = get_location(ip)
+        weather_info = get_weather_info(
+            longitude=location.longitude,
+            latitude=location.latitude
+        )
+        output = build_output_dict(location, weather_info, ip)
+        df = pandas.DataFrame(output, index=[index])
+        if index == 0:
+            df.to_csv('output.csv', mode='a')
+        else:
+            df.to_csv('output.csv', mode='a', header=False)
+
+
+def use_data():
+    """
+    Uses data produced from API on weather and locations to give groups,
+    aggregates and visualizations
+    """
+    data = pandas.read_csv('output.csv')
+    # Group by
+    city_group = data.groupby(by=["City"])
+    country_group = data.groupby(by=["Country"])
+    continent_group = data.groupby(by=["Continent"])
+
+    logger.info("Grouping Demonstration")
+    logger.info("Grouping Example: Details on IPs from Europe")
+    logger.info(continent_group.get_group("Europe"))
+    # TODO: Country group/data is off
+    logger.info("Grouping Example: Details on IPs from Seattle")
+    logger.info(city_group.get_group("Seattle"))
+
+    # Aggregation
+    logger.info("Aggregation Demonstration")
+    logger.info("Aggregation example: Average Temperature in Continents")
+    continent_average_temp = continent_group.aggregate({"Temperature": "mean"})
+    logger.info(continent_average_temp)
+
+    logger.info("Aggregation example: Mean Max/Min Temperature in Continents")
+    continent_average_temp_min_and_max = continent_group.aggregate(
+        {
+            "MaxTemperature": "mean",
+            "MinTemperature": "mean"
+        }
+    )
+    logger.info(continent_average_temp_min_and_max)
+
+    # Visualizations
+    logger.info("Visualization Demonstration")
+    logger.info("Plot example: Average Temperature in Continents")
+    res = continent_average_temp.reset_index()
+    res_wide = res.melt(id_vars="Continent")
+    plt.figure(figsize=(10, 8))
+    sns.barplot(x="Continent", y="value", data=res_wide, hue="variable")
+    logger.info("Plot example: Mean Max/Min Temperature in Continents")
+    continent_average_temp_min_and_max.plot.bar(figsize=(18, 6))
+    plt.show()

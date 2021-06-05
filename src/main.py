@@ -1,13 +1,9 @@
 import argparse
 import logging
 
-import pandas
-
 from utils import (
-    get_location,
-    get_weather_info,
-    build_output_dict,
-    get_ips_from_file
+    build_weather_data_from_locations,
+    use_data
 )
 
 logger = logging.getLogger()
@@ -18,20 +14,11 @@ logger.setLevel("DEBUG")
 def main(ip_address_path):
     """
     Main function which gets location and weather info from IP addresses
+    and produces, groups, aggregates and plots
     :param ip_address_path: path to text file with list of ip addresses
     """
-
-    outputs = []
-    ips = get_ips_from_file(ip_address_path)
-    for ip in ips:
-        location = get_location(ip)
-        weather_info = get_weather_info(
-            longitude=location.longitude,
-            latitude=location.latitude
-        )
-        output = build_output_dict(location, weather_info, ip)
-        outputs.append(output)
-    print(pandas.DataFrame(outputs))
+    build_weather_data_from_locations(ip_address_path)
+    use_data()
 
 
 if __name__ == '__main__':
