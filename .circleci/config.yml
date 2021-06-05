@@ -26,5 +26,5 @@ jobs:
       - run: |
           TAG=$CIRCLE_BUILD_NUM
           docker build -t emmaogji/mintelweather:$TAG . --build-arg location_key=$LOCATION_API_KEY --build-arg weather_key=$WEATHER_API_KEY
-          echo $DOCKER_PASS | docker login -u $DOCKER_USER -p $DOCKERHUB_PASSWORD
+          echo $DOCKER_PASS | docker login -u emmaogiji -p $DOCKERHUB_PASSWORD
           docker push emmaogji/mintelweather:$TAG
