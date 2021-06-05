@@ -1,0 +1,32 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@1.2
+
+workflows:
+  build-and-test:
+      jobs:
+        - Build and Push
+
+jobs:
+  Build and Push:
+    docker:
+      - image: cimg/python:3.9
+        auth:
+          username: emmaogiji
+          password: $DOCKERHUB_PASSWORD
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+      - setup_remote_docker:
+          version: 19.03.13
+          docker_layer_caching: true
+
+      # build and push Docker image
+      - run: |
+          cd src
+          TAG=$CIRCLE_BUILD_NUM
+          docker build -t emmaogji/mintelweather:$TAG . --build-arg location_key=$LOCATION_API_KEY --build-arg weather_key=$WEATHER_API_KEY
+          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+          docker push emmaogji/mintelweather:$TAG
