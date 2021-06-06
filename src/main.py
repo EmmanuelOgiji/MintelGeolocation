@@ -1,14 +1,20 @@
 import argparse
 import logging
 
-from .utils import (
-    build_weather_data_from_locations,
-    use_data
-)
+try:
+    from utils import (
+        build_weather_data_from_locations,
+        use_data
+    )
+except(ModuleNotFoundError, ImportError):
+    from .utils import (
+        build_weather_data_from_locations,
+        use_data
+    )
 
 logger = logging.getLogger()
-logging.basicConfig(level="DEBUG")
-logger.setLevel("DEBUG")
+logging.basicConfig(level="INFO")
+logger.setLevel("INFO")
 
 
 def main(ip_address_path):

@@ -13,21 +13,20 @@ from src.utils import (
 
 
 class UnitTests(TestCase):
-    @mock.patch('src.utils.requests.get')
+    @mock.patch('src.utils.requests.Session.get')
     def test_location_info(self, mock_get):
         mock_get().json = MagicMock(return_value=MockResponses.location_mock)
         location_obj = get_location("8.8.8.8")
         expected = dict(
-            city="Mountain View",
-            province="California",
-            country="United States",
-            continent="North America",
-            longitude="-122.08421",
-            latitude="37.42240"
+            city="Montreal",
+            longitude=-73.5493,
+            latitude=45.6085,
+            country="Canada",
+            region="Quebec"
         )
         self.assertDictEqual(location_obj.__dict__, expected)
 
-    @mock.patch('src.utils.requests.get')
+    @mock.patch('src.utils.requests.Session.get')
     def test_weather_info(self, mock_get):
         mock_get().json = MagicMock(return_value=MockResponses.weather_mock)
         weather_obj = get_weather_info("-3.3443", "55.9548")
@@ -45,12 +44,11 @@ class UnitTests(TestCase):
         weather_obj = WeatherInfo(MockResponses.weather_mock)
         expected = dict(
             IPAddress="8.8.8.8",
-            City="Mountain View",
-            Longitude="-122.08421",
-            Latitude="37.42240",
-            Province="California",
-            Country="United States",
-            Continent="North America",
+            City="Montreal",
+            Longitude=-73.5493,
+            Latitude=45.6085,
+            Country="Canada",
+            Region="Quebec",
             Temperature=18.17,
             MinTemperature=16.67,
             MaxTemperature=19,
@@ -80,43 +78,20 @@ class UnitTests(TestCase):
 
 class MockResponses:
     location_mock = {
-        "ip": "8.8.8.8",
-        "hostname": "dns.google",
-        "continent_code": "NA",
-        "continent_name": "North America",
-        "country_code2": "US",
-        "country_code3": "USA",
-        "country_name": "United States",
-        "country_capital": "Washington, D.C.",
-        "state_prov": "California",
-        "district": "Santa Clara",
-        "city": "Mountain View",
-        "zipcode": "94043-1351",
-        "latitude": "37.42240",
-        "longitude": "-122.08421",
-        "is_eu": False,
-        "calling_code": "+1",
-        "country_tld": ".us",
-        "languages": "en-US,es-US,haw,fr",
-        "country_flag": "https://ipgeolocation.io/static/flags/us_64.png",
-        "geoname_id": "6301403",
-        "isp": "Google LLC",
-        "connection_type": "",
-        "organization": "Google LLC",
-        "asn": "AS15169",
-        "currency": {
-            "code": "USD",
-            "name": "US Dollar",
-            "symbol": "$"
-        },
-        "time_zone": {
-            "name": "America/Los_Angeles",
-            "offset": -8,
-            "current_time": "2020-12-17 07:49:45.872-0800",
-            "current_time_unix": 1608220185.872,
-            "is_dst": False,
-            "dst_savings": 1
-        }
+        "query": "24.48.0.1",
+        "status": "success",
+        "country": "Canada",
+        "countryCode": "CA",
+        "region": "QC",
+        "regionName": "Quebec",
+        "city": "Montreal",
+        "zip": "H1K",
+        "lat": 45.6085,
+        "lon": -73.5493,
+        "timezone": "America/Toronto",
+        "isp": "Le Groupe Videotron Ltee",
+        "org": "Videotron Ltee",
+        "as": "AS5769 Videotron Telecom Ltee"
     }
 
     weather_mock = {

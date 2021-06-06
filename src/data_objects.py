@@ -2,11 +2,10 @@ class Location:
     """Data object to hold required location details"""
     def __init__(self, location_dict):
         self.city = location_dict.get("city")
-        self.province = location_dict.get("state_prov")
-        self.country = location_dict.get("country_name")
-        self.continent = location_dict.get("continent_name")
-        self.latitude = location_dict.get("latitude")
-        self.longitude = location_dict.get("longitude")
+        self.country = location_dict.get("country")
+        self.region = location_dict.get("regionName")
+        self.latitude = location_dict.get("lat")
+        self.longitude = location_dict.get("lon")
 
 
 class WeatherInfo:
@@ -21,5 +20,5 @@ class WeatherInfo:
 
 class Constants:
     """Data object to hold constants"""
-    LOCATION_API = "https://api.ipgeolocation.io/ipgeo"
+    LOCATION_API = "http://ip-api.com/json/"
     WEATHER_API = "https://api.openweathermap.org/data/2.5/find"
