@@ -1,14 +1,20 @@
 import argparse
 import logging
 
-from .utils import (
-    build_weather_data_from_locations,
-    use_data
-)
+try:
+    from utils import (
+        build_weather_data_from_locations,
+        demo_groupings_aggregations_and_visualizations
+    )
+except(ModuleNotFoundError, ImportError):
+    from .utils import (
+        build_weather_data_from_locations,
+        demo_groupings_aggregations_and_visualizations
+    )
 
 logger = logging.getLogger()
-logging.basicConfig(level="DEBUG")
-logger.setLevel("DEBUG")
+logging.basicConfig(level="INFO")
+logger.setLevel("INFO")
 
 
 def main(ip_address_path):
@@ -18,7 +24,7 @@ def main(ip_address_path):
     :param ip_address_path: path to text file with list of ip addresses
     """
     build_weather_data_from_locations(ip_address_path)
-    use_data()
+    demo_groupings_aggregations_and_visualizations()
 
 
 if __name__ == '__main__':
