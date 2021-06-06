@@ -42,6 +42,7 @@ jobs:
       # build and push Docker image
       - run: |
           TAG=$CIRCLE_BUILD_NUM
-          docker build -t emmaogiji/mintelweather:$TAG . --build-arg location_key=$LOCATION_API_KEY --build-arg weather_key=$WEATHER_API_KEY
+          docker build -t emmaogiji/mintelweather:$TAG -t emmaogiji/mintelweather:latest . --build-arg location_key=$LOCATION_API_KEY --build-arg weather_key=$WEATHER_API_KEY
           echo $DOCKERHUB_PASSWORD | docker login -u emmaogiji --password-stdin
           docker push emmaogiji/mintelweather:$TAG
+          docker push emmaogiji/mintelweather:latest
