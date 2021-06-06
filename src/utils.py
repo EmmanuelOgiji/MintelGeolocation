@@ -6,7 +6,7 @@ import requests
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from data_objects import Location, Constants, WeatherInfo
+from .data_objects import Location, Constants, WeatherInfo
 
 logger = logging.getLogger()
 logging.basicConfig(level="DEBUG")

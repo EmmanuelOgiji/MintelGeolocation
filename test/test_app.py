@@ -3,7 +3,7 @@ import tempfile
 from unittest import TestCase, mock
 from unittest.mock import MagicMock
 
-from data_objects import Location, WeatherInfo
+from src.data_objects import Location, WeatherInfo
 from src.utils import (
     get_location,
     get_weather_info,

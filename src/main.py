@@ -1,7 +1,7 @@
 import argparse
 import logging
 
-from utils import (
+from .utils import (
     build_weather_data_from_locations,
     use_data
 )
