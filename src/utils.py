@@ -81,7 +81,7 @@ def build_output_dict(location, weather_info, ip):
         Longitude=location.longitude,
         Latitude=location.latitude,
         Province=location.province,
-        Country=location.province,
+        Country=location.country,
         Continent=location.continent,
         Temperature=weather_info.temp,
         MinTemperature=weather_info.min_temp,
@@ -124,6 +124,7 @@ def build_weather_data_from_locations(ip_address_path):
         )
         output = build_output_dict(location, weather_info, ip)
         df = pandas.DataFrame(output, index=[index])
+        logger.debug(f"Output: \n {df}")
         if index == 0:
             df.to_csv('output.csv', mode='a')
         else:
@@ -142,14 +143,19 @@ def use_data():
     continent_group = data.groupby(by=["Continent"])
 
     logger.info("Grouping Demonstration")
+
     logger.info("Grouping Example: Details on IPs from Europe")
     logger.info(continent_group.get_group("Europe"))
-    # TODO: Country group/data is off
+
+    logger.info("Grouping Example: Details on IPs from the US")
+    logger.info(country_group.get_group("United States"))
+
     logger.info("Grouping Example: Details on IPs from Seattle")
     logger.info(city_group.get_group("Seattle"))
 
     # Aggregation
     logger.info("Aggregation Demonstration")
+
     logger.info("Aggregation example: Average Temperature in Continents")
     continent_average_temp = continent_group.aggregate({"Temperature": "mean"})
     logger.info(continent_average_temp)
@@ -165,11 +171,12 @@ def use_data():
 
     # Visualizations
     logger.info("Visualization Demonstration")
-    logger.info("Plot example: Average Temperature in Continents")
+
+    logger.info("Figure 1: Average Temperature in Continents")
     res = continent_average_temp.reset_index()
     res_wide = res.melt(id_vars="Continent")
     plt.figure(figsize=(10, 8))
     sns.barplot(x="Continent", y="value", data=res_wide, hue="variable")
-    logger.info("Plot example: Mean Max/Min Temperature in Continents")
+    logger.info("Figure 2: Mean Max/Min Temperature in Continents")
     continent_average_temp_min_and_max.plot.bar(figsize=(18, 6))
     plt.show()

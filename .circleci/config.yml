@@ -6,13 +6,30 @@ orbs:
 workflows:
   build-and-test:
       jobs:
+        - Run unit tests
         - Build and Push:
             filters:
               branches:
                 only: master
+            requires:
+              - Run unit tests
 
 jobs:
-  Build and Push:
+  Run unit tests:
+    docker:
+      - image: cimg/python:3.9
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+      - run:
+          name: Run unit tests and test coverage
+          command: |
+            python -m xmlrunner discover \
+            -s test.unit_test -o test_reports
+      - store_test_results:
+          path: test_reports
+  Build and Push Docker Image:
     docker:
       - image: cimg/python:3.9
         auth:
@@ -20,8 +37,6 @@ jobs:
           password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
-      - python/install-packages:
-          pkg-manager: pip
       - setup_remote_docker:
           version: 19.03.13
 
