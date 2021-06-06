@@ -3,6 +3,8 @@ import os
 
 import pandas
 import requests
+import tkinter as tk
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 from urllib3 import Retry
 from requests.adapters import HTTPAdapter
@@ -195,17 +197,27 @@ def demo_groupings_aggregations_and_visualizations():
 
     # Visualizations
     logger.info("Visualization Demonstration")
+    root = tk.Tk()
 
     logger.info("Figure 1: Box plot of Humidity in Germany")
-    fig1 = country_group.get_group("Germany").boxplot(column="Humidity")
+    figure1 = plt.Figure(figsize=(5, 7))
+    ax1 = figure1.add_subplot(111)
+    plot = FigureCanvasTkAgg(figure1, root)
+    plot.get_tk_widget().pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+    fig1 = country_group.get_group("Germany").boxplot(column="Humidity", ax=ax1)
     fig1.set_ylabel("Humidity (%)")
     fig1.set_title("Figure 1: Box plot of Humidity in Germany")
 
     logger.info("Figure 2: Bar chart showing Mean Max/Min Temperature in Countries")
+    figure2 = plt.Figure(figsize=(12, 22))
+    ax2 = figure2.add_subplot(111)
+    bar = FigureCanvasTkAgg(figure2, root)
+    bar.get_tk_widget().pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
     fig2 = country_average_temp_min_and_max.plot.bar(
-        figsize=(20, 8),
-        title="Figure2: Bar chart showing Mean Max/Min Temperature in Countries"
+        title="Figure2: Bar chart showing Mean Max/Min Temperature in Countries",
+        ax=ax2
     )
-    fig2.set_ylabel("Temperature ('\u00b0 C'")
+    fig2.set_ylabel("Temperature (\u00b0 C)")
     fig2.set_xlabel("Countries")
-    plt.show()
+
+    root.mainloop()

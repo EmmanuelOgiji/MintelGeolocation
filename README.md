@@ -35,7 +35,7 @@ This python3 project comprises of the following:
     with dependencies installed, to run the application, from the root of the repository, run the following commands:
     - cd src
     - python main.py --ips ip_addresses.txt
-    - Note: Running this application locally requires **LOCATION_API_KEY** and **WEATHER_API_KEY** to be set as environment variables with their values being an API key for the IP Geolocation API and the OpenWeathermap API respectfully.
+    - Note: Running this application locally requires **WEATHER_API_KEY** to be set as environment variables with the value being an API key for the OpenWeathermap API.
  
 - Run tests:
     with dependencies installed, to run the application, from the root of the repository, run the following commands:

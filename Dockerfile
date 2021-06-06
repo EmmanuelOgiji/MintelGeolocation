@@ -2,9 +2,7 @@
 
 FROM python:3.8-slim-buster
 
-ARG location_key
 ARG weather_key
-ENV LOCATION_API_KEY=$location_key
 ENV WEATHER_API_KEY=$weather_key
 ENV MPLCONFIGDIR=/app/matlab
 
