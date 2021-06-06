@@ -25,7 +25,7 @@ This python3 project comprises of the following:
 - the .circleci directory contains a config.yml file which uses CircleCI to put in a CI/CD pipeline for the application. The pipeline:
     - runs the unit tests and produces xml reports based on that. This happens for any branch on the repository
     - builds and pushes the docker image to Dockerhub. The image can be found on Dockerhub [here](https://hub.docker.com/repository/docker/emmaogiji/mintelweather)
-    - A successful build of the application through the pipeline is available [here](#TODO). Access to that can be requested if needed
+    - The pipeline project and all the builds are available [here](https://app.circleci.com/pipelines/github/EmmanuelOgiji/MintelGeolocation). Access to that can be requested if needed
 - a requirements.txt file containing all the python dependencies of the project. These can be installed using **pip install -r requirements.txt** from the root of this repository
 
 
