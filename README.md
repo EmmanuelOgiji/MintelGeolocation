@@ -44,4 +44,4 @@ This python3 project comprises of the following:
   - docker run emmaogiji/mintelweather:latest
 
 ##Notes:
-- Due to the limitation of the API used, the code does take a significant amount of time to run. The API was favoured over others due to the fact that most others had daily limits
+- Due to the limitation of the API used, the code does take a significant amount of time to run. The API was favoured over others due to the fact that most others had daily limits. This limitation is also the reason behinf the number of ip addresses (samples) used being near the floor of the range given.
