@@ -25,8 +25,7 @@ jobs:
       - run:
           name: Run unit tests and test coverage
           command: |
-            python -m xmlrunner discover \
-            -s test.unit_test -o test_reports
+            python -m xmlrunner discover -s test -o test_reports
       - store_test_results:
           path: test_reports
   Build and Push Docker Image:

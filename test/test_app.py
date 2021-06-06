@@ -41,8 +41,8 @@ class UnitTests(TestCase):
         self.assertDictEqual(weather_obj.__dict__, expected)
 
     def test_build_output_dict(self):
-        location_obj = Location(location_mock)
-        weather_obj = WeatherInfo(weather_mock)
+        location_obj = Location(MockResponses.location_mock)
+        weather_obj = WeatherInfo(MockResponses.weather_mock)
         expected = dict(
             IPAddress="8.8.8.8",
             City="Mountain View",
