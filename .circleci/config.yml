@@ -7,7 +7,7 @@ workflows:
   build-and-test:
       jobs:
         - Run unit tests
-        - Build and Push:
+        - Build and Push Docker Image:
             filters:
               branches:
                 only: master
