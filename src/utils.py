@@ -4,7 +4,6 @@ import os
 import pandas
 import requests
 import matplotlib.pyplot as plt
-import seaborn as sns
 from urllib3 import Retry
 from requests.adapters import HTTPAdapter
 
@@ -152,7 +151,7 @@ def build_weather_data_from_locations(ip_address_path):
             df.to_csv('output.csv', mode='a', header=False)
 
 
-def use_data():
+def demo_groupings_aggregations_and_visualizations():
     """
     Uses data produced from API on weather and locations to give groups,
     aggregates and visualizations
@@ -177,27 +176,36 @@ def use_data():
     # Aggregation
     logger.info("Aggregation Demonstration")
 
-    logger.info("Aggregation example: Average Temperature in Countries")
-    continent_average_temp = country_group.aggregate({"Temperature": "mean"})
-    logger.info(continent_average_temp)
+    logger.info("Aggregation example: Mean Temperature in Countries")
+    country_average_temp = country_group.aggregate({"Temperature": "mean"})
+    logger.info(country_average_temp)
+
+    logger.info("Aggregation example: Mean Temperature in Regions")
+    region_average_temp = region_group.aggregate({"Temperature": "mean"})
+    logger.info(region_average_temp)
 
     logger.info("Aggregation example: Mean Max/Min Temperature in Countries")
-    continent_average_temp_min_and_max = country_group.aggregate(
+    country_average_temp_min_and_max = country_group.aggregate(
         {
             "MaxTemperature": "mean",
             "MinTemperature": "mean"
         }
     )
-    logger.info(continent_average_temp_min_and_max)
+    logger.info(country_average_temp_min_and_max)
 
     # Visualizations
     logger.info("Visualization Demonstration")
 
-    logger.info("Figure 1: Average Temperature in Countries")
-    res = continent_average_temp.reset_index()
-    res_wide = res.melt(id_vars="Continent")
-    plt.figure(figsize=(10, 8))
-    sns.barplot(x="Continent", y="value", data=res_wide, hue="variable")
-    logger.info("Figure 2: Mean Max/Min Temperature in Countries")
-    continent_average_temp_min_and_max.plot.bar(figsize=(18, 6))
+    logger.info("Figure 1: Box plot of Humidity in Germany")
+    fig1 = country_group.get_group("Germany").boxplot(column="Humidity")
+    fig1.set_ylabel("Humidity (%)")
+    fig1.set_title("Figure 1: Box plot of Humidity in Germany")
+
+    logger.info("Figure 2: Bar chart showing Mean Max/Min Temperature in Countries")
+    fig2 = country_average_temp_min_and_max.plot.bar(
+        figsize=(20, 8),
+        title="Figure2: Bar chart showing Mean Max/Min Temperature in Countries"
+    )
+    fig2.set_ylabel("Temperature ('\u00b0 C'")
+    fig2.set_xlabel("Countries")
     plt.show()

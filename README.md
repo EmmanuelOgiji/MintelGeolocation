@@ -1,4 +1,4 @@
-# MintelGeolocation
+# Mintel Final Technical Test
 
 ##Overview 
 This python3 project comprises of the following:
@@ -16,10 +16,11 @@ This python3 project comprises of the following:
             - Displaying Details on IPs from the country:USA
             - Displaying Details on IPs from the city:Seattle
         - Aggregation and Visualizations:
-            - Aggregation: Average Temperature in Countries
+            - Aggregation: Mean Temperature in Countries
+            - Aggregation: Mean Temperature in Regions
             - Aggregation: Mean Max/Min Temperature in Countries
-            - Figure 1: Bar chart comparing Average Temperature in Countries
-            - Figure 2: Bar chart comparing Mean Max/Min Temperature in Countries
+            - Figure 1: Box plot of Humidity in Germany
+            - Figure 2: Bar chart showing Mean Max/Min Temperature in Countries
 - the test directory contains unit tests that utilize mocking to just check the functionality of the application
 - a Dockerfile used to build a Docker image with the application. This is used to satisfy the requirements for the deployment process to be **repeatable**, be run using **docker** and **via a single command**
 - the .circleci directory contains a config.yml file which uses CircleCI to put in a CI/CD pipeline for the application. The pipeline:
