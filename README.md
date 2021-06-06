@@ -3,7 +3,7 @@
 ##Overview 
 This python3 project comprises of the following:
 - the src directory houses an application which does the following:
-    - Gets a list of ip addresses from the ip_addresses.txt file. These serve to represent the IP addresses from the users in the scenario given. The IP Addresses were sourced from [TOR's exit relay list](https://check.torproject.org/torbulkexitlist). There are 550 ip addresses included in the file. This satisfies the sample size requirement of greater than 500 but below 10000. Capability was added as well to allow another text file be used if needed.
+    - Gets a list of ip addresses from the ip_addresses.txt file. These serve to represent the IP addresses from the users in the scenario given. The IP Addresses were sourced from [TOR's exit relay list](https://check.torproject.org/torbulkexitlist). There are 550 ip addresses included in the file. This satisfies the sample size requirement of greater than 500 but below 10000.
     - For each of these ip addresses:
         - uses the [IP-API Geolocation API](https://ip-api.com/docs/api:json) to get details on the location/geolocation of this IP address. Note that this API has a limit of 45 requests/minute thus retry mechanism and exponential backoff are used.
         - uses the location details to get details on the weather in that location. This is done using the [OpenWeatherMapAPI](https://openweathermap.org/current)
@@ -42,7 +42,7 @@ This python3 project comprises of the following:
     - python -m unittest discover -s test
     
 - Run with docker (following the requirements)
-  - docker run emmaogiji/mintelweather:latest
+  - docker run -e DISPLAY=$DISPLAY emmaogiji/mintelweather:latest
 
 ##Notes:
 - Due to the limitation of the API used, the code does take a significant amount of time to run. The API was favoured over others due to the fact that most others had daily limits. This limitation is also the reason behinf the number of ip addresses (samples) used being near the floor of the range given.
