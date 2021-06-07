@@ -1,5 +1,8 @@
 import argparse
 import logging
+from flask import Flask, send_file
+
+app = Flask(__name__)
 
 try:
     from utils import (
@@ -25,6 +28,13 @@ def main(ip_address_path):
     """
     build_weather_data_from_locations(ip_address_path)
     demo_groupings_aggregations_and_visualizations()
+    logger.info("Starting Flask app to show plots. Details below")
+    app.run(port=5000, debug=False)
+
+
+@app.route('/')
+def deliver_plots():
+    return send_file("figures.png", mimetype='image/png')
 
 
 if __name__ == '__main__':
