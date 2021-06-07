@@ -5,7 +5,7 @@ import pandas
 import requests
 import tkinter as tk
 import matplotlib
-matplotlib.use('TkAgg')
+matplotlib.use('Agg')
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 from urllib3 import Retry
