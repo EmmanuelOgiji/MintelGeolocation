@@ -21,6 +21,7 @@ This python3 project comprises of the following:
             - Aggregation: Mean Max/Min Temperature in Countries
             - Figure 1: Box plot of Humidity in Germany
             - Figure 2: Bar chart showing Mean Max/Min Temperature in Countries
+            - **NOTE The visualizations are served from a flask app thus you have to visit the url**
 - the test directory contains unit tests that utilize mocking to just check the functionality of the application
 - a Dockerfile used to build a Docker image with the application. This is used to satisfy the requirements for the deployment process to be **repeatable**, be run using **docker** and **via a single command**
 - the .circleci directory contains a config.yml file which uses CircleCI to put in a CI/CD pipeline for the application. The pipeline:
@@ -42,7 +43,8 @@ This python3 project comprises of the following:
     - python -m unittest discover -s test
     
 - Run with docker (following the requirements)
-  - docker run -e DISPLAY=$DISPLAY emmaogiji/mintelweather:latest
+  - docker run -p 5000:5000 emmaogiji/mintelweather:latest
+  - docker-compose up (from the root of the repo)
 
 ##Notes:
 - Due to the limitation of the API used, the code does take a significant amount of time to run. The API was favoured over others due to the fact that most others had daily limits. This limitation is also the reason behinf the number of ip addresses (samples) used being near the floor of the range given.

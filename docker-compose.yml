@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  app:
+    image: my-app:latest
+    build:
+      context: .
+      args:
+        weather_key: $WEATHER_API_KEY
+    ports:
+      - "5000:5000"
