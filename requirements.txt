@@ -1,6 +1,6 @@
+Flask == 1.1.2
 matplotlib == 3.4.2
 pandas == 1.2.4
 requests == 2.21.0
 unittest_xml_reporting == 3.0.4
 urllib3 == 1.24.3
-Flask
