@@ -1,6 +1,6 @@
 # Mintel Final Technical Test
 
-##Overview 
+## Overview 
 This python3 project comprises of the following:
 - the src directory houses an application which does the following:
     - Gets a list of ip addresses from the ip_addresses.txt file. These serve to represent the IP addresses from the users in the scenario given. The IP Addresses were sourced from [TOR's exit relay list](https://check.torproject.org/torbulkexitlist). There are 550 ip addresses included in the file. This satisfies the sample size requirement of greater than 500 but below 10000.
@@ -31,7 +31,7 @@ This python3 project comprises of the following:
 - a requirements.txt file containing all the python dependencies of the project. These can be installed using **pip install -r requirements.txt** from the root of this repository
 
 
-##Usage:
+## Usage:
 - Run locally:
     with dependencies installed, to run the application, from the root of the repository, run the following commands:
     - cd src
@@ -46,5 +46,5 @@ This python3 project comprises of the following:
   - docker run -p 5000:5000 emmaogiji/mintelweather:latest
   - docker-compose up (from the root of the repo with the required environment variable set)
 
-##Notes:
+## Notes:
 - Due to the limitation of the API used, the code does take a significant amount of time to run. The API was favoured over others due to the fact that most others had daily limits. This limitation is also the reason behinf the number of ip addresses (samples) used being near the floor of the range given.
