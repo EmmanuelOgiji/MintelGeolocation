@@ -28,8 +28,11 @@ def main(ip_address_path):
     """
     build_weather_data_from_locations(ip_address_path)
     demo_groupings_aggregations_and_visualizations()
-    logger.info("Starting Flask app to show plots. Details below")
-    app.run(port=5000, debug=False)
+    logger.info(
+        "Starting Flask app to show plots. This will be available on http://localhost:5000\n"
+        "PLEASE DO NOT TRY TO ACCESS BY THE URL BELOW as it will not work"
+    )
+    app.run(port=5000, debug=False, host='0.0.0.0')
 
 
 @app.route('/')

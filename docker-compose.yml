@@ -2,7 +2,7 @@ version: "3"
 
 services:
   app:
-    image: my-app:latest
+    image: emmaogiji/mintelweather:local
     build:
       context: .
       args:
