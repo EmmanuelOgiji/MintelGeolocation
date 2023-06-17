@@ -1,4 +1,3 @@
-# Dummy change
 import argparse
 import logging
 from flask import Flask, send_file
