@@ -47,4 +47,4 @@ This python3 project comprises of the following:
   - docker-compose up (from the root of the repo with the required environment variable set)
 
 ## Notes:
-- Due to the limitation of the API used, the code does take a significant amount of time to run. The API was favoured over others due to the fact that most others had daily limits. This limitation is also the reason behinf the number of ip addresses (samples) used being near the floor of the range given.
+- Due to the limitation of the API used, the code does take a significant amount of time to run. The API was favoured over others due to the fact that most others had daily limits. This limitation is also the reason behind the number of ip addresses (samples) used being near the floor of the range given.
